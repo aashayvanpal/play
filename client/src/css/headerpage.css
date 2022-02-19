@@ -1,0 +1,33 @@
+
+.header{
+    width: 100%;
+    background-color: #DBC268;
+    display: inline-flex;
+}
+
+#logo, 
+#logo2{
+    height:100px;
+    cursor: pointer;
+}
+
+#words{
+    margin-right:10px;
+}
+
+#logo3,#words2,#words3{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#logo3{
+    cursor: pointer;
+}
+
+.mid-content{
+    text-align: center;
+}
+#words2,#words3{
+    width: fit-content;
+}
