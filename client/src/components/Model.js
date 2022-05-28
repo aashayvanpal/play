@@ -1,6 +1,7 @@
 import React from 'react'
 import ModalExample from './ModalExample.js'
 import ToastExample from './ToastExample.js'
+import Star from './Star.js'
 import confirm from 'reactstrap-confirm'
 
 import Multiselect from 'multiselect-react-dropdown';
@@ -79,6 +80,8 @@ export default class Modal extends React.Component {
                 <button onClick={() => {
                     console.log("selcted multiselect values are:", this.state.selectedValues)
                 }}>get multiselect values</button>
+
+                <Star />
             </div >
         )
     }
