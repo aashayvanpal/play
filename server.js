@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const path = require('path')
+const emailController = require('./client/src/controllers/sendEmail')
 // const cors = require('cors')
 const routes = require('./routes/api.js')
 
@@ -63,10 +64,18 @@ app.use(express.urlencoded({ extended: false }))
 app.use(morgan('tiny'))
 
 app.use('/api', routes)
+app.use('/sendEmail/welcome', emailController.welcome)
+app.use('/sendEmail/orderPlaced', emailController.orderPlaced)
+app.use('/sendEmail/orderApproved', emailController.orderApproved)
+app.use('/sendEmail/orderCompleted', emailController.orderCompleted)
+app.use('/sendEmail/orderRejected', emailController.orderRejected)
+app.use('/sendEmail/bill', emailController.bill)
+app.use('/sendEmail/accountDeletion', emailController.deleteAccount)
+app.use('/sendEmail/forgotPassword', emailController.forgotPassword)
 
 
 // Deployment Step3
-if(process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
 }
 

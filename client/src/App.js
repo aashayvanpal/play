@@ -8,6 +8,7 @@ import Model from './components/Model.js'
 import PDF from './components/PDF.js'
 import CalcTool from './components/CalcTool.js'
 import NotFoundPage from './components/NotFoundPage.js'
+import GMap from './components/GMap.js'
 import { Switch, BrowserRouter, Link, Route } from 'react-router-dom'
 
 export default function App() {
@@ -23,7 +24,8 @@ export default function App() {
         <Link to="/model">Modal demo</Link>
         <Link to="/pdf">PDF</Link>
         <Link to="/calcTool">calcTool</Link>
-          {/* <Email /> */}
+        <Link to="/map">Google Map</Link>
+        {/* <Email /> */}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/posts" component={Posts} />
@@ -33,6 +35,7 @@ export default function App() {
           <Route exact path="/emails" component={Email} />
           <Route exact path="/pdf" component={PDF} />
           <Route exact path="/calcTool" component={CalcTool} />
+          <Route exact path="/map" component={GMap} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
 

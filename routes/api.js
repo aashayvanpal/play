@@ -1,5 +1,5 @@
 const express = require('express')
-// const BlogPost = require('../models/blogPost.js')
+const emailController = require('../client/src/controllers/sendEmail.js')
 
 const router = express.Router()
 // Routes

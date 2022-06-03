@@ -1,11 +1,13 @@
 var nodemailer = require('nodemailer')
-const { getMaxListeners } = require('../../../models/blogPost')
 
 var transporter = nodemailer.createTransport({
-    service: process.env.NODEMAILER_SERVICE,
+    // service: process.env.NODEMAILER_SERVICE,
+    service: 'gmail',
     auth: {
-        user: process.env.NODEMAILER_USER,
-        pass: process.env.NODEMAILER_PASS
+        // user: process.env.NODEMAILER_USER,
+        // pass: process.env.NODEMAILER_PASS
+        user: 'aashay.vanpal@gmail.com',
+        pass: 'kcpsztkryqkfvljp'
     }
 })
 
