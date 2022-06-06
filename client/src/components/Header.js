@@ -1,6 +1,11 @@
 import React, { useState } from "react"
+import { Accordion } from 'react-bootstrap';
 import DatePicker, { getAllDatesInRange } from "react-multi-date-picker"
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
+import BreakfastComponent from './BreakfastComponent.js'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/headerpage.css'
 
 export default function Example() {
     const today = new Date()
@@ -10,6 +15,8 @@ export default function Example() {
 
     const [values, setValues] = useState([today, tomorrow])
     const [dates, setDates] = useState([])
+    const [finalOrder, setFinalOrder] = useState({})
+    const [orderType, setOrderType] = useState('Breakfast')
 
 
 
@@ -260,13 +267,53 @@ export default function Example() {
         }
     }
     const order2 = {}
-    const order3 = { Dates: {} }
+    const order3 = { Dates: [] }
 
     order3.customer = order1.customer
     // order3.Dates[order1.customer.eventDate].push(...order1.items)
     // console.log(order3)
 
-    console.log(order3)
+    const date1 = {
+        "items": [
+            {
+                "category": [
+                    "all",
+                    "lunch",
+                    "dinner"
+                ],
+                "_id": "5f1a6ebe0bb9761000e7b8aa",
+                "name": "Plain Puri",
+                "price": "30",
+                "imgUrl": "Plain-puri.jpeg",
+                "display": true,
+                "__v": 0,
+                "measured": "plate",
+                "isSelected": true,
+                "quantity": "23"
+            },
+            {
+                "category": [
+                    "all",
+                    "lunch",
+                    "dinner"
+                ],
+                "_id": "61a60a3f2f2c43c5df720b96",
+                "name": "Buttermilk (Mattha)",
+                "price": "30",
+                "measured": "plate",
+                "imgUrl": "default.png",
+                "display": true,
+                "ingredients": "",
+                "recipie": "",
+                "__v": 0,
+                "isSelected": true,
+                "quantity": "23"
+            }]
+    }
+
+    console.log('render')
+    console.log({ date1 })
+    console.log({ order3 })
 
 
 
@@ -296,7 +343,34 @@ export default function Example() {
 
 
             <iframe style={{ 'background': '#FFFFFF', 'border': 'none', 'borderRadius': '2px', 'boxShadow': '0 2px 10px 0 rgba(70, 76, 79, .2)' }} width="640" height="480" src="https://charts.mongodb.com/charts-aaswadcaterers-production-cedix/embed/charts?id=62965be6-02e8-4441-8bff-3cefed881463&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
-        </div>
+            {/* <Button color="danger">Danger!</Button> */}
+            <div>
+                <Accordion
+                    // open="1"
+                    // toggle={function noRefCheck(target) { console.log(target) }}
+                >
+                    {dates.map((date, i) =>
+                        <Accordion.Item>
+                            <Accordion.Header onClick={() => { console.log('clicked:', date, i) }} targetId={i} style={{ textAlign: 'center' }}>
+                                {date}
+                            </Accordion.Header>
+                            <Accordion.Body accordionId={i} >
+                                <strong>
+                                    <ul id="accordion-list">
+                                        <li onClick={() => setOrderType('Breakfast')}>Breakfast</li>
+                                        <li onClick={() => setOrderType('Lunch')}>Lunch</li>
+                                        <li onClick={() => setOrderType('Dinner')}>Dinner</li>
+                                    </ul>
+                                    {orderType} <br />
+                                    {order3.customer.fullName}
+                                </strong>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    )}
+                </Accordion>
+            </div>
+
+        </div >
     )
 }
 
