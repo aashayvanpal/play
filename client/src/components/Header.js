@@ -1,18 +1,11 @@
 import React, { useState } from "react"
 import { Accordion } from 'react-bootstrap';
-import DatePicker, { getAllDatesInRange } from "react-multi-date-picker"
+import DatePicker from "react-multi-date-picker"
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
 import BreakfastComponent from './BreakfastComponent.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/headerpage.css'
-
-
-
-
-// trying to render items in the checked , giving undefined error
-
-
 
 export default function Example() {
     const today = new Date()
@@ -26,21 +19,21 @@ export default function Example() {
     const [orderType, setOrderType] = useState('Breakfast')
     // const [orderDates, setOrderDates] = useState([
     //     {
-    //         '2022/06/07': {
+    //         '2022/06/08': {
     //             'Breakfast': { items: [11, 22, 33] },
     //             'Lunch': { items: ['l1', 'l2', 'l3'] },
     //             'Dinner': { items: ['d1', 'd2', 'l3'] }
     //         }
     //     },
     //     {
-    //         '2022/06/08': {
+    //         '2022/06/09': {
     //             'Breakfast': { items: [44, 55, 66] },
     //             'Lunch': { items: ['q1', 'q2', 'q3'] },
     //             'Dinner': { items: ['w1', 'w2', 'w3'] }
     //         }
     //     },
     //     {
-    //         '2022/06/09': {
+    //         '2022/06/10': {
     //             'Breakfast': { items: [77, 88, 99] },
     //             'Lunch': { items: ['aa', 'as', 'ad'] },
     //             'Dinner': { items: ['zx', 'zc', 'zv'] }
@@ -65,19 +58,7 @@ export default function Example() {
             }
         }))
 
-        console.log('empty dates', [orderDates, emptyDates])
-
-
         setOrderDates(emptyDates)
-
-
-        // console.log(getAllDatesInRange(dateObjects))
-        // let allDates = getAllDatesInRange(dateObjects, true);
-
-        // if (allDates.length < 2) return;
-
-        // console.log("you selected \n" + allDates.join(",\n"));
-
     }
 
 
@@ -88,25 +69,45 @@ export default function Example() {
     }
 
     const confirmDate = (mealType, date, i) => {
-        console.log('confirmDate:', mealType, date)
+        console.log('confirmDate:', mealType, date, i)
         const verifyItems = ['item1', 'item2', 'item3']
-        orderDates[mealType] = { items: verifyItems }
-        // console.log('obj:'obj)
-        // console.log('obj:', orderDates[mealType])
-        // console.log('obj2:', { [mealType]: orderDates[mealType] })
-        // const newOrder = { [date]: { [mealType]: orderDates[mealType] } }
-        // setOrderDates([...orderDates, newOrder])
+
+        const index = dates.indexOf(date)
+        console.log('orderDates state:', orderDates)
+        console.log('date present at:', index)
+        console.log('date:', Object.keys(orderDates[index])[0])
+
+        // orderDates[index][date][mealType] = { items: verifyItems } //correct way 
+        //correct way 
+        setOrderDates([...orderDates, orderDates[index][date][mealType] = { items: verifyItems }])
         const test = {
             [date]: {
                 [mealType]: { items: ['test1', 'test1', 'test1'] }
             }
         }
-        orderDates[i] = test
-        console.log('orderDates[i]', orderDates[i])
-        // console.log('new order:', newOrder)
-        setOrderDates([...orderDates, orderDates[i]])
+        // check here if mealType is same ?,if not add mealType object
+
+        // if (date === Object.keys(orderDates[index])[0]) {
+        //     console.log('same dates')
+        //     // append the mealType property
+        //     console.log('orderDates[index][mealtype]', orderDates[index][mealType])
+        //     orderDates[index][mealType] = { items: verifyItems }
+        //     test[date][mealType] = orderDates[index][mealType]
+        //     orderDates[i] = test
+        //     setOrderDates([...orderDates, orderDates[i]])
 
 
+        // } else {
+        //     console.log('different date')
+        // }
+
+
+
+
+
+
+        // orderDates[i] = test
+        // console.log('orderDates[i]', orderDates[i])
         // console.log('final date:', orderDates)
     }
     return (
@@ -125,18 +126,17 @@ export default function Example() {
 
 
             {/* < iframe style={{ 'background': '#FFFFFF', 'border': 'none', 'borderRadius': '2px', 'boxShadow': '0 2px 10px 0 rgba(70, 76, 79, .2)' }} width="640" height="480" src="https://charts.mongodb.com/charts-aaswadcaterers-production-cedix/embed/charts?id=62965be6-02e8-4441-8bff-3cefed881463&maxDataAge=3600&theme=light&autoRefresh=true" ></iframe > */}
-            {/* <Button color="danger">Danger!</Button> */}
             < div >
                 <Accordion
                 // open="1"
                 // toggle={function noRefCheck(target) { console.log(target) }}
                 >
                     {dates.map((date, i) =>
-                        <Accordion.Item>
-                            <Accordion.Header onClick={() => { console.log('clicked:', date, i) }} targetId={i} style={{ textAlign: 'center' }}>
+                        <Accordion.Item key={i}>
+                            <Accordion.Header onClick={() => { console.log('clicked:', date, i) }} targetid={i} style={{ textAlign: 'center' }}>
                                 {date}
                             </Accordion.Header>
-                            <Accordion.Body accordionId={i} >
+                            <Accordion.Body accordianid={i} >
                                 <strong>
                                     <ul id="accordion-list">
                                         <li onClick={() => dayNavigation('Breakfast', date, i)}>Breakfast</li>
@@ -152,7 +152,7 @@ export default function Example() {
                                 {typeof (orderDates[i][date][orderType]) !== 'undefined' ?
                                     (<div>
 
-                                        {orderDates[i][date][orderType].items.map(item => <>{item}<br /></>)}
+                                        {orderDates[i][date][orderType].items.map(item => <div key={item}>{item}<br /></div>)}
                                     </div>)
                                     : (null)}
 
@@ -162,25 +162,7 @@ export default function Example() {
                         </Accordion.Item>
                     )}
                 </Accordion>
-
-
             </div >
-
         </div >
     )
 }
-
-
-// import React from 'react'
-// import ReactAnime from 'react-animejs'
-// const { Anime, stagger } = ReactAnime
-
-
-// export default function Header() {
-//     return (
-//         <div>
-
-//             This is header
-//         </div>
-//     )
-// }
