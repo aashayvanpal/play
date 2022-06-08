@@ -79,7 +79,9 @@ export default function Example() {
 
         // orderDates[index][date][mealType] = { items: verifyItems } //correct way 
         //correct way 
-        setOrderDates([...orderDates, orderDates[index][date][mealType] = { items: verifyItems }])
+        orderDates[index][date][mealType] = { items: verifyItems }
+        const newOrder = [...orderDates]
+        setOrderDates(newOrder)
         const test = {
             [date]: {
                 [mealType]: { items: ['test1', 'test1', 'test1'] }
@@ -128,11 +130,12 @@ export default function Example() {
             {/* < iframe style={{ 'background': '#FFFFFF', 'border': 'none', 'borderRadius': '2px', 'boxShadow': '0 2px 10px 0 rgba(70, 76, 79, .2)' }} width="640" height="480" src="https://charts.mongodb.com/charts-aaswadcaterers-production-cedix/embed/charts?id=62965be6-02e8-4441-8bff-3cefed881463&maxDataAge=3600&theme=light&autoRefresh=true" ></iframe > */}
             < div >
                 <Accordion
-                // open="1"
-                // toggle={function noRefCheck(target) { console.log(target) }}
+                    alwaysOpen
+                // open='1'
+                // toggle={function noRefCheck(target) { console.log('toggled target:', target) }}
                 >
                     {dates.map((date, i) =>
-                        <Accordion.Item key={i}>
+                        <Accordion.Item key={i} eventKey={i} >
                             <Accordion.Header onClick={() => { console.log('clicked:', date, i) }} targetid={i} style={{ textAlign: 'center' }}>
                                 {date}
                             </Accordion.Header>
@@ -162,6 +165,10 @@ export default function Example() {
                         </Accordion.Item>
                     )}
                 </Accordion>
+                <button onClick={() => {
+                    console.log('final order:', orderDates)
+                    // if the orders have empty array , remove the property
+                }}>Get final order</button>
             </div >
         </div >
     )
