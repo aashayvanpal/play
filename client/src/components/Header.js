@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { Accordion } from 'react-bootstrap';
 import DatePicker from "react-multi-date-picker"
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
-import BreakfastComponent from './BreakfastComponent.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/headerpage.css'
@@ -17,30 +16,7 @@ export default function Example() {
     const [dates, setDates] = useState([])
     const [finalOrder, setFinalOrder] = useState({})
     const [orderType, setOrderType] = useState('Breakfast')
-    // const [orderDates, setOrderDates] = useState([
-    //     {
-    //         '2022/06/08': {
-    //             'Breakfast': { items: [11, 22, 33] },
-    //             'Lunch': { items: ['l1', 'l2', 'l3'] },
-    //             'Dinner': { items: ['d1', 'd2', 'l3'] }
-    //         }
-    //     },
-    //     {
-    //         '2022/06/09': {
-    //             'Breakfast': { items: [44, 55, 66] },
-    //             'Lunch': { items: ['q1', 'q2', 'q3'] },
-    //             'Dinner': { items: ['w1', 'w2', 'w3'] }
-    //         }
-    //     },
-    //     {
-    //         '2022/06/10': {
-    //             'Breakfast': { items: [77, 88, 99] },
-    //             'Lunch': { items: ['aa', 'as', 'ad'] },
-    //             'Dinner': { items: ['zx', 'zc', 'zv'] }
-    //         }
-    //     }])
-
-    const [orderDates, setOrderDates] = useState([])
+        const [orderDates, setOrderDates] = useState([])
 
 
     const selectedDates = (dateObjects) => {
@@ -78,39 +54,10 @@ export default function Example() {
         console.log('date:', Object.keys(orderDates[index])[0])
 
         // orderDates[index][date][mealType] = { items: verifyItems } //correct way 
-        //correct way 
         orderDates[index][date][mealType] = { items: verifyItems }
         const newOrder = [...orderDates]
         setOrderDates(newOrder)
-        const test = {
-            [date]: {
-                [mealType]: { items: ['test1', 'test1', 'test1'] }
-            }
-        }
-        // check here if mealType is same ?,if not add mealType object
-
-        // if (date === Object.keys(orderDates[index])[0]) {
-        //     console.log('same dates')
-        //     // append the mealType property
-        //     console.log('orderDates[index][mealtype]', orderDates[index][mealType])
-        //     orderDates[index][mealType] = { items: verifyItems }
-        //     test[date][mealType] = orderDates[index][mealType]
-        //     orderDates[i] = test
-        //     setOrderDates([...orderDates, orderDates[i]])
-
-
-        // } else {
-        //     console.log('different date')
-        // }
-
-
-
-
-
-
-        // orderDates[i] = test
-        // console.log('orderDates[i]', orderDates[i])
-        // console.log('final date:', orderDates)
+        
     }
     return (
         <div>
@@ -127,7 +74,7 @@ export default function Example() {
             {/* {dates.map(date => <li>{date} - {order3.customer.fullName}</li>)} */}
 
 
-            {/* < iframe style={{ 'background': '#FFFFFF', 'border': 'none', 'borderRadius': '2px', 'boxShadow': '0 2px 10px 0 rgba(70, 76, 79, .2)' }} width="640" height="480" src="https://charts.mongodb.com/charts-aaswadcaterers-production-cedix/embed/charts?id=62965be6-02e8-4441-8bff-3cefed881463&maxDataAge=3600&theme=light&autoRefresh=true" ></iframe > */}
+            < iframe style={{ 'background': '#FFFFFF', 'border': 'none', 'borderRadius': '2px', 'boxShadow': '0 2px 10px 0 rgba(70, 76, 79, .2)' }} width="640" height="480" src="https://charts.mongodb.com/charts-aaswadcaterers-production-cedix/embed/charts?id=62965be6-02e8-4441-8bff-3cefed881463&maxDataAge=3600&theme=light&autoRefresh=true" ></iframe >
             < div >
                 <Accordion
                     alwaysOpen
