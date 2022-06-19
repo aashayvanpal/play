@@ -16,7 +16,7 @@ export default function Example() {
     const [dates, setDates] = useState([])
     const [finalOrder, setFinalOrder] = useState({})
     const [orderType, setOrderType] = useState('Breakfast')
-        const [orderDates, setOrderDates] = useState([])
+    const [orderDates, setOrderDates] = useState([])
 
 
     const selectedDates = (dateObjects) => {
@@ -57,7 +57,7 @@ export default function Example() {
         orderDates[index][date][mealType] = { items: verifyItems }
         const newOrder = [...orderDates]
         setOrderDates(newOrder)
-        
+
     }
     return (
         <div>
@@ -115,6 +115,20 @@ export default function Example() {
                 <button onClick={() => {
                     console.log('final order:', orderDates)
                     // if the orders have empty array , remove the property
+
+                    order.forEach(orderObj => {
+                        for (let obj in orderObj) {
+                            // console.log(orderObj[obj])
+                            for (let mealType in orderObj[obj]) {
+                                // console.log(orderObj[obj][mealType].items.length)
+                                if (orderObj[obj][mealType].items.length === 0) {
+                                    delete orderObj[obj][mealType]
+                                }
+                            }
+                        }
+                    })
+
+                    console.log(order)
                 }}>Get final order</button>
             </div >
         </div >
